@@ -5,9 +5,9 @@
     </header>
 
     <section class="main-content w-50 mx-auto">
-      <main-navigation></main-navigation>
-      <windows-list></windows-list>
-      <!-- <rooms-list></rooms-list> -->
+      <main-navigation @tab-changed="currentTab = $event"></main-navigation>
+      <windows-list v-if="currentTab === 'windows'"></windows-list>
+      <rooms-list v-if="currentTab === 'rooms'"></rooms-list>
     </section>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
   },
   data: function() {
     return {
-      title: 'My Frontend'
+      title: 'My Frontend',
+      currentTab: 'windows'
     }
   }
 }

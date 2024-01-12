@@ -1,10 +1,18 @@
 <template>
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Windows</a>
+      <a
+          class="nav-link"
+          :class="{ active: activeTab === 'windows' }"
+          @click.prevent="selectTab('windows')"
+      >Windows</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Rooms</a>
+      <a
+          class="nav-link"
+          :class="{ active: activeTab === 'rooms' }"
+          @click.prevent="selectTab('rooms')"
+      >Rooms</a>
     </li>
   </ul>
 </template>
@@ -12,6 +20,17 @@
 
 <script>
 export default {
-  name: 'MainNavigation'
-}
+  name: 'MainNavigation',
+  data() {
+    return {
+      activeTab: 'windows',
+    };
+  },
+  methods: {
+    selectTab(tab) {
+      this.activeTab = tab;
+      this.$emit('tab-changed', tab);
+    },
+  },
+};
 </script>

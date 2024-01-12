@@ -1,7 +1,7 @@
 <template>
   <div class="window border border-secondary rounded p-2 mb-2" :class="{expanded: isExpanded}">
     <div class="top-row d-flex" @click="toggleExpand">
-      <div class="window-name fw-bold pe-3">{{window.name}}</div>
+      <div class="window-name fw-bold pe-3 ">{{window.name}}</div>
       <div class="room-name text-muted">{{window.roomName}}</div>
 
       <div class="open-status ms-4" :class="{open: isWindowOpen, closed: !isWindowOpen}">
@@ -20,7 +20,7 @@
     <template v-if="isExpanded">
       <hr/>
       <div class="details d-flex">
-        <button type="button" class="btn btn-secondary me-2" @click="switchWindow">{{ isWindowOpen ? 'Close' : 'Open' }} window</button>
+        <button type="button" class="btn btn-secondary me-2">{{ isWindowOpen ? 'Close' : 'Open' }} window</button>
         <button @click="confirmDelete(window.id)" class="btn btn-danger">Delete</button>
       </div>
     </template>
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     isWindowOpen: function() {
-      return this.window.windowStatus.value !== 0.0; 
+      return this.window.status.value !== 0.0;
     }
   },
   methods: {
@@ -50,13 +50,6 @@ export default {
     },
     toggleExpand() {
       this.isExpanded = !this.isExpanded;
-    },
-    async switchWindow() {
-      let response = await axios.patch(`${API_HOST}/api/windows/${this.window.id}/switch`);
-      
-      // Here, I should use the response from the server, but the backend currently
-      // has a bug, where it doesn't send back the correct value. This is a workaround.
-      this.window.windowStatus.value = (this.window.windowStatus.value === 0.0 ?  1.0 : 0.0);
     }
   }
 }

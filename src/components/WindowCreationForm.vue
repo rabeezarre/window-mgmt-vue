@@ -53,6 +53,11 @@ export default {
   },
   methods: {
     async createWindow() {
+      if (!this.newWindow.name || this.newWindow.roomId === '') {
+        this.error = true;
+        return;
+      }
+
       try {
         await axios.post(`${API_HOST}/api/windows`, this.newWindow);
         this.$emit('window-created', this.newWindow);

@@ -32,7 +32,6 @@ export default {
   name: 'WindowsList',
   data: function () {
     return {
-      /* Initialize windows with an empty array, while waiting for actual data to be retrieved from the API */
       windows: [],
       isFormVisible: false
     }
@@ -61,7 +60,7 @@ export default {
     async deleteWindow(windowId) {
       try {
         await axios.delete(`${API_HOST}/api/windows/${windowId}`);
-        this.windows = this.windows.filter(window => window.id !== windowId);
+        await this.fetchWindows()
       } catch (error) {
         console.error('Error deleting window', error);
       }
