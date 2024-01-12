@@ -50,7 +50,6 @@ app.delete('/api/windows/:id', (req, res) => {
 
     // Delete the window
     windows = windows.filter(window => window.id !== windowId);
-    console.log(windows)
     res.status(200).send({ message: 'Window deleted successfully' });
 });
 

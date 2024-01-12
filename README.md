@@ -6,7 +6,11 @@ To start the backend server for the project, follow these steps:
 
 ```cd backend-tp-4```
 
-2. Run the server using Node.js:
+2. Install the necessary dependencies:
+
+```npm install```
+
+3. Run the server using Node.js:
 
 ```node server.js```
 
@@ -14,7 +18,7 @@ To start the backend server for the project, follow these steps:
 
 To set up and run the frontend, execute the following commands:
 
-1. Install the necessary dependencies:
+1. Install the necessary dependencies in the root of the project:
 
 ```npm install```
 
