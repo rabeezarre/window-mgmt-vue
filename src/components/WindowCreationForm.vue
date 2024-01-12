@@ -6,7 +6,7 @@
     </div>
 
     <div v-if="error" class="alert alert-danger" role="alert">
-      An unexpected problem occurred, the window could not be created.
+      {{ errorMessage }}
     </div>
 
     <form @submit.prevent="createWindow">
@@ -34,7 +34,8 @@ export default {
         name: '',
         roomId: ''
       },
-      error: false
+      error: false,
+      errorMessage: ''
     };
   },
   async created() {
@@ -53,17 +54,24 @@ export default {
   },
   methods: {
     async createWindow() {
+      // Reset error state
+      this.error = false;
+      this.errorMessage = '';
+
+      // Check for empty fields
       if (!this.newWindow.name || this.newWindow.roomId === '') {
         this.error = true;
+        this.errorMessage = 'Please fill in all fields.';
         return;
       }
 
       try {
         await axios.post(`${API_HOST}/api/windows`, this.newWindow);
         this.$emit('window-created', this.newWindow);
-        this.error = false;
       } catch (error) {
         this.error = true;
+        this.errorMessage = 'An unexpected problem occurred while creating the window.';
+        console.error('Error creating window:', error);
       }
     }
   },
